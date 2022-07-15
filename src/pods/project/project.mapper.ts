@@ -23,3 +23,17 @@ export const mapProjectFromApiToVm = (
       }
     : viewModel.createEmptyProject();
 };
+
+export const mapEmployeeFromApiToVm= 
+(employees: apiModel.EmployeeSummary[]):
+  viewModel.EmployeeSummary[] =>
+    employees !== undefined && employees !== null
+      ? employees.map(employee => mapEmployeesFromApiToVm(employee))
+      : [];
+
+
+const mapEmployeesFromApiToVm= (employee: apiModel.EmployeeSummary): viewModel.EmployeeSummary => ({
+  id: employee.id,
+  isAssigned: employee.isAssigned,
+  employeeName: employee.employeeName,
+});
